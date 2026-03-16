@@ -61,8 +61,8 @@ if (!emailUser || !emailPass || !emailTo) {
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: emailUser,
-    pass: emailPass,
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
 });
 
@@ -210,6 +210,14 @@ app.post("/contact", async (req, res) => {
   const email = req.body.email?.trim();
   const message = req.body.message?.trim();
 
+  console.log("=== CONTACT FORM SUBMIT ===");
+  console.log("Naam aanwezig:", !!name);
+  console.log("Email aanwezig:", !!email);
+  console.log("Bericht aanwezig:", !!message);
+  console.log("EMAIL_USER:", process.env.EMAIL_USER);
+  console.log("EMAIL_PASS aanwezig:", !!process.env.EMAIL_PASS);
+  console.log("EMAIL_TO:", process.env.EMAIL_TO);
+
   if (!name || !email || !message) {
     return res.status(400).send("Vul alle velden in.");
   }
@@ -219,6 +227,7 @@ app.post("/contact", async (req, res) => {
   }
 
   if (!emailUser || !emailPass || !emailTo) {
+    console.error("❌ Email instellingen ontbreken");
     return res
       .status(500)
       .send("De e-mailinstellingen ontbreken in het .env bestand.");
@@ -229,7 +238,9 @@ app.post("/contact", async (req, res) => {
   const safeMessage = escapeHtml(message).replace(/\n/g, "<br>");
 
   try {
-    await transporter.sendMail({
+    console.log("⏳ Probeer mail te verzenden...");
+
+    const info = await transporter.sendMail({
       from: `"ChibiCorner Contact" <${emailUser}>`,
       to: emailTo,
       replyTo: email,
@@ -242,6 +253,9 @@ app.post("/contact", async (req, res) => {
         <p>${safeMessage}</p>
       `,
     });
+
+    console.log("✅ Mail verzonden");
+    console.log("Message ID:", info.messageId);
 
     res.send(`
       <html lang="nl">
@@ -290,7 +304,7 @@ app.post("/contact", async (req, res) => {
       </html>
     `);
   } catch (error) {
-    console.error("Fout bij verzenden van e-mail:", error);
+    console.error("❌ Fout bij verzenden van e-mail:", error);
     res.status(500).send("Er ging iets mis bij het verzenden van je bericht.");
   }
 });
