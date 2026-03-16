@@ -1,107 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+
 /* Algemene body styling */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #FFF5E1; /* Crème */
-    color: #2C3E50; /* navy blauw, laat ik staan omdat het goed contrasteert */
-    margin: 0;
-    padding: 0 20px 40px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #FFF5E1;
+  color: #2C3E50;
+  margin: 0;
+  padding: 0 20px 40px 20px;
 }
 
-/* Titel */
-h1 {
-    font-family: 'Arial Black', Gadget, sans-serif;
-    color: #A3D9C1;  /* Muntgroen */
-    text-align: center;
-    margin: 30px 0;
-    text-shadow: 1px 1px 2px #7AAE9F; /* donkerdere tint muntgroen voor schaduw */
-}
-
-/* Tabel styling */
-table {
-    border-collapse: collapse;
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto 40px auto;
-    box-shadow: 0 0 15px rgba(46, 62, 80, 0.1);
-    background-color: #FFF5E1; /* Crème */
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-th, td {
-    padding: 12px 15px;
-    text-align: left;
-}
-
-th {
-    background-color: #FFC8A2; /* Zacht perzik */
-    color: #2C3E50; /* navy blauw */
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-tr:nth-child(even) {
-    background-color: #A7C7E7; /* Babyblauw */
-    color: #2C3E50;
-}
-
-tr:hover {
-    background-color: #A3D9C1; /* Muntgroen */
-    color: white;
-}
-/* Normale stijl voor de rij en knop */
-tbody tr {
-  color: black;
-  background-color: white;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-tbody tr:hover {
-  background-color: #A3D9C1;  /* groene achtergrond als voorbeeld */
-  color: white;               /* tekst wit */
-}
-
-/* Maak de link knop ook wit als de rij gehoverd is */
-tbody tr:hover .btn-bekijk {
-  color: white;
-  border: 1px solid white; /* optioneel: rand zodat knop zichtbaar blijft */
-  background-color: transparent; /* of maak background ook wit als je wil */
-  text-decoration: underline; /* voor duidelijkheid */
-  transition: color 0.3s ease, border 0.3s ease;
-}
-
-/* Standaard stijl knop */
-.btn-bekijk {
-  color: #2C3E50; /* donkerblauw/grijs */
-  background-color: #A3D9C1;
-  padding: 6px 12px;
-  border-radius: 4px;
-  text-decoration: none;
-  display: inline-block;
-  border: none;
-  transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
-}
-/* Afbeeldingen */
-img {
-    height: auto;
-    border-radius: 6px;
-    box-shadow: 1px 1px 5px rgba(163, 217, 193, 0.5); /* lichte muntgroen tint */
-}
-
-/* Links */
-a {
-    color: #A3D9C1; /* Muntgroen */
-    text-decoration: none;
-    font-weight: 600;
-}
-
-a:hover {
-    text-decoration: underline;
-    color: white; 
-}
-
-/* Detailpagina styling */
 /* Algemene container */
 .container {
   max-width: 1200px;
@@ -109,70 +16,20 @@ a:hover {
   padding: 10px;
 }
 
-/* Detail pagina flex layout */
-.detail-container {
-  display: flex;
-  gap: 30px;
-  max-width: 900px;
-  margin: 20px auto 60px auto;
-  background: #FFF5E1;
-  padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 0 20px rgba(163, 217, 193, 0.4);
-  color: #2C3E50;
-  flex-wrap: nowrap; /* voorkom dat het naar onder valt */
+/* Titel */
+h1 {
+  font-family: 'Arial Black', Gadget, sans-serif;
+  color: #A3D9C1;
+  text-align: center;
+  margin: 30px 0;
+  text-shadow: 1px 1px 2px #7AAE9F;
 }
 
-/* Zorg dat afbeelding zijn grootte behoudt */
-.image-section {
-  flex-shrink: 0;
-}
-
-/* Tekst neemt de rest van de ruimte */
-.info-section {
-  flex: 1;
-}
-
-/* Knop styling */
-.btn-back {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 18px;
-  background-color: #A3D9C1;
-  color: white;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.btn-back:hover {
-  background-color: #3a8c26;
-}
-th a {
-  color: #2C3E50;
-  text-decoration: none;
-  font-weight: 700;
-}
-th a:hover { text-decoration: underline; }
-
-/* flexbox voor layout */
-main.container {
-  max-width: 1100px;
-  margin: 30px auto;
-  display: flex;
-  gap: 30px;
-}
-
-/* Hoofd content */
-section.manga-overview {
-  flex: 1;
-}
-/* Header container styling */
+/* Header */
 header {
-  background-color: #FFF5E1; /* same cream background */
+  background-color: #FFF5E1;
   padding: 15px 0 10px 0;
-  box-shadow: 0 2px 6px rgba(163, 217, 193, 0.25); /* subtle mint green shadow */
+  box-shadow: 0 2px 6px rgba(163, 217, 193, 0.25);
   margin-bottom: 40px;
 }
 
@@ -181,16 +38,15 @@ header {
   margin: 0 auto;
   padding: 0 20px;
   display: flex;
-  justify-content: center; /* center horizontally */
+  justify-content: center;
   align-items: center;
   gap: 15px;
 }
 
-/* H1 styling overrides for header */
 header h1 {
-  font-family: 'Arial Black', Gadget, sans-serif; /* same as your h1 */
+  font-family: 'Arial Black', Gadget, sans-serif;
   font-size: 2.8rem;
-  color: #A3D9C1; /* mint green */
+  color: #A3D9C1;
   margin: 0;
   display: flex;
   align-items: center;
@@ -198,29 +54,102 @@ header h1 {
   text-shadow: 1px 1px 2px #7AAE9F;
 }
 
-/* Logo image styling */
 header h1 img {
-  height: 60px;       /* slightly bigger logo */
+  height: 60px;
   width: auto;
   border-radius: 8px;
-  box-shadow: 1px 1px 6px rgba(163, 217, 193, 0.5); /* subtle mint shadow */
+  box-shadow: 1px 1px 6px rgba(163, 217, 193, 0.5);
 }
 
+/* Logo */
+.logo {
+  width: 250px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 6px rgba(163, 217, 193, 0.5);
+  display: block;
+  margin: 0 auto;
+}
 
-/* Aside rechts in boekstijl */
+/* Nav styling */
+nav {
+  background-color: #A7C7E7;
+  padding: 15px 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  font-family: 'Comic Neue', cursive, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 0 0 20px 20px;
+  margin-bottom: 50px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+nav ul li a {
+  display: inline-block;
+  padding: 8px 20px;
+  background-color: #FFC8A2;
+  color: #2C3E50;
+  font-weight: 700;
+  font-size: 1.1rem;
+  font-family: 'Comic Neue', cursive, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-decoration: none;
+  border-radius: 30px;
+  box-shadow: 0 3px 6px rgba(255, 200, 162, 0.5);
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+nav ul li a:hover,
+nav ul li a:focus {
+  background-color: #A3D9C1;
+  color: white;
+  box-shadow: 0 6px 12px rgba(163, 217, 193, 0.7);
+  transform: scale(1.1);
+  outline: none;
+}
+
+/* Links */
+a {
+  color: #A3D9C1;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: white;
+}
+
+/* Main layout */
+main.container {
+  max-width: 1100px;
+  margin: 30px auto;
+  display: flex;
+  gap: 30px;
+}
+
+section.manga-overview {
+  flex: 1;
+}
+
+/* Aside rechts */
 aside.bookmark {
   position: fixed;
   top: 100px;
   right: 0;
   width: 150px;
   height: 300px;
-  background: #FFC8A2; /* Zacht perzik */
-  color: #2C3E50; /* navy blauw */
+  background: #FFC8A2;
+  color: #2C3E50;
   padding: 20px;
   font-family: 'Georgia', serif;
   font-size: 1.1rem;
-  box-shadow: -3px 3px 10px rgba(0,0,0,0.15);
-  
+  box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.15);
   clip-path: polygon(
     0 0,
     100% 0,
@@ -228,7 +157,6 @@ aside.bookmark {
     50% 100%,
     0 calc(100% - 40px)
   );
-
   z-index: 9999;
 }
 
@@ -236,7 +164,7 @@ aside.bookmark h2 {
   margin-top: 0;
   font-weight: bold;
   text-align: center;
-  border-bottom: 2px solid #A3D9C1; /* Muntgroen */
+  border-bottom: 2px solid #A3D9C1;
   padding-bottom: 10px;
 }
 
@@ -260,84 +188,110 @@ aside.bookmark a:hover {
   text-decoration: underline;
 }
 
-.about-us {
-  max-width: 1100px;       /* breedte beperken */
-  margin: 40px auto;      /* horizontaal centreren + wat marge boven en onder */
-  padding: 20px;
-  text-align: center;     /* tekst centreren */
-  background: #f9f9f9;    /* lichte achtergrond voor contrast */
+/* Tabel styling */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 40px auto;
+  box-shadow: 0 0 15px rgba(46, 62, 80, 0.1);
+  background-color: #FFF5E1;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-.logo {
-  width: 250px;
-  border-radius: 8px;
-  box-shadow: 1px 1px 6px rgba(163, 217, 193, 0.5);
-  display: block;      /* Make the image a block element */
-  margin: 0 auto;      /* Auto left & right margins to center */
+  overflow: hidden;
 }
 
-
-/* Nav styling */
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
-
-nav {
-  background-color: #A7C7E7; /* Babyblauw */
-  padding: 15px 30px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  font-family: 'Comic Neue', cursive, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  border-radius: 0 0 20px 20px;
-  margin-bottom: 50px;
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
 }
 
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 25px;
-  margin: 0;
-  padding: 0;
-  justify-content: center;
-}
-
-nav ul li a {
-  display: inline-block;
-  padding: 8px 20px;
-  background-color: #FFC8A2; /* Zacht perzik */
+th {
+  background-color: #FFC8A2;
   color: #2C3E50;
   font-weight: 700;
-  font-size: 1.1rem;
-  text-decoration: none;
-  border-radius: 30px;
-  box-shadow: 0 3px 6px rgba(255, 200, 162, 0.5);
-  transition: 
-    background-color 0.3s ease,
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-nav ul li a:hover,
-nav ul li a:focus {
-  background-color: #A3D9C1; /* Muntgroen */
+th a {
+  color: #2C3E50;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+th a:hover {
+  text-decoration: underline;
+}
+
+tr:nth-child(even) {
+  background-color: #A7C7E7;
+  color: #2C3E50;
+}
+
+tbody tr {
+  color: black;
+  background-color: white;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+tbody tr:hover {
+  background-color: #A3D9C1;
   color: white;
-  box-shadow: 0 6px 12px rgba(163, 217, 193, 0.7);
+}
+
+/* Knoppen */
+.btn-bekijk {
+  color: #2C3E50;
+  background-color: #A3D9C1;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-block;
+  border: none;
+  transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease, transform 0.3s ease;
+}
+
+tbody tr:hover .btn-bekijk {
+  color: white;
+  border: 1px solid white;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+.btn-bekijk:hover,
+.btn-bekijk:focus {
+  background-color: #A7C7E7;
+  color: white;
+  box-shadow: 0 6px 12px rgba(167, 199, 231, 0.7);
   transform: scale(1.1);
   outline: none;
 }
 
-/* Footer styling */
-footer {
-  background-color: #FFC8A2; /* Zacht perzik */
+.btn-back {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 18px;
+  background-color: #A3D9C1;
   color: white;
-  text-align: center;
-  padding: 15px 20px;
+  border-radius: 4px;
+  text-decoration: none;
   font-weight: bold;
-  box-shadow: inset 0 3px 5px rgba(255, 255, 255, 0.3);
-  border-radius: 12px 12px 0 0;
-  margin-top: 40px;
-  font-family: 'Arial Black', Gadget, sans-serif;
+  transition: background-color 0.3s ease;
 }
 
-/* Detail page flex content */
+.btn-back:hover {
+  background-color: #7AAE9F;
+}
+
+/* Afbeeldingen */
+img {
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 1px 1px 5px rgba(163, 217, 193, 0.5);
+}
+
+/* Detailpagina */
 .detail-container {
   display: flex;
   gap: 30px;
@@ -348,10 +302,20 @@ footer {
   border-radius: 8px;
   box-shadow: 0 0 20px rgba(163, 217, 193, 0.4);
   color: #2C3E50;
-
-  /* **Forceer row, ook op kleine schermen, voor testen:** */
-  flex-direction: row !important;
+  flex-direction: row;
   flex-wrap: nowrap;
+}
+
+.image-section {
+  flex-shrink: 0;
+}
+
+.info-section,
+.detail-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .detail-container img {
@@ -363,86 +327,18 @@ footer {
   align-self: flex-start;
 }
 
-.detail-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-
 .manga-info {
   margin-bottom: 20px;
 }
 
 .author-info {
-  border-top: 2px solid #A7C7E7; /* babyblauw lijn */
+  border-top: 2px solid #A7C7E7;
   padding-top: 15px;
   font-style: italic;
-  color: #7E9CBF; /* iets lichtere babyblauw */
-}
-/* ===== Auteurpagina: container in stijl van detail ===== */
-.author-container {
-  /* zelfde kaartlook als .detail-container */
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  max-width: 900px;
-  margin: 20px auto 60px auto;
-  background: #FFF5E1;
-  padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 0 20px rgba(163, 217, 193, 0.4);
-  color: #2C3E50;
+  color: #7E9CBF;
 }
 
-.author-container h1 {
-  margin: 0 0 6px 0;
-  color: #A3D9C1; /* muntgroen, zoals je headings */
-}
-
-.author-meta {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font-size: 1rem;
-}
-
-.author-meta li {
-  margin: 4px 0;
-}
-
-/* subtitel in dezelfde stijl als detail-secties */
-.author-container h2 {
-  margin-top: 20px;
-  margin-bottom: 10px;
-  border-bottom: 2px solid #A7C7E7; /* babyblauw accent */
-  padding-bottom: 6px;
-  color: #2C3E50;
-}
-
-/* ===== Lijst van manga’s van deze auteur ===== */
-.author-works {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: 1fr;        /* mobiel 1 kolom */
-  gap: 12px;
-}
-
-@media (min-width: 680px) {
-  .author-works {
-    grid-template-columns: 1fr 1fr;  /* tablet 2 kolommen */
-  }
-}
-
-@media (min-width: 980px) {
-  .author-works {
-    grid-template-columns: 1fr 1fr;  /* desktop 2 kolommen blijft overzichtelijk */
-  }
-}
-
+/* Auteurpagina */
 .author-container {
   display: flex;
   flex-direction: column;
@@ -489,12 +385,6 @@ footer {
   gap: 12px;
 }
 
-@media (min-width: 680px) {
-  .author-works {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
 .author-work {
   display: flex;
   gap: 16px;
@@ -512,74 +402,6 @@ footer {
 }
 
 .author-work img {
-  width: 100px;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 1px 1px 5px rgba(163, 217, 193, 0.5);
-  flex-shrink: 0;
-}
-
-.author-work .work-info {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  min-width: 0;
-}
-
-.author-work .work-title a {
-  color: #2C3E50;
-  font-weight: 700;
-  text-decoration: none;
-  font-size: 1.1rem;
-}
-
-.author-work .work-title a:hover {
-  text-decoration: underline;
-}
-
-.author-work .work-meta {
-  font-size: 1rem;
-  color: #5d6570;
-}
-
-.author-actions {
-  margin-top: 10px;
-}
-
-.author-actions .btn-back {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 10px 18px;
-  background-color: #A3D9C1;
-  color: white;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.author-actions .btn-back:hover {
-  background-color: #7AAE9F;
-}
-/* kaartje per werk in dezelfde sfeer als detail */
-.author-work {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-  background: rgba(163, 217, 193, 0.18); /* zachte mint-achtergrond */
-  border-radius: 10px;
-  padding: 16px;
-  box-shadow: 0 4px 10px rgba(163, 217, 193, 0.25);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.author-work:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(163, 217, 193, 0.35);
-}
-
-/* thumbnail in lijn met je detail-afbeeldingen */
-.author-work img {
   width: 150px;
   height: auto;
   border-radius: 8px;
@@ -587,7 +409,6 @@ footer {
   flex-shrink: 0;
 }
 
-/* titel + meta rechts naast thumbnail */
 .author-work .work-info {
   display: flex;
   flex-direction: column;
@@ -610,7 +431,6 @@ footer {
   color: #5d6570;
 }
 
-/* terugknop in dezelfde styling als detail */
 .author-actions {
   margin-top: 10px;
 }
@@ -631,9 +451,18 @@ footer {
   background-color: #7AAE9F;
 }
 
-/* ===== GENRE PAGINA STIJL ===== */
+/* About */
+.about-us {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-/* Grid container */
+/* Genres */
 main h1 {
   text-align: center;
   margin-top: 20px;
@@ -657,18 +486,11 @@ main p {
   padding: 0 15px;
 }
 
-/* Kaarten */
-
-.examples {
-  font-style: italic;
-  color: #A7C7E7;
-}
-
 .card {
   background: rgba(163, 217, 193, 0.25);
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 4px 10px rgba(163, 217, 193, 0.25); /* muntgroen schaduw */
+  box-shadow: 0 4px 10px rgba(163, 217, 193, 0.25);
   display: flex;
   flex-direction: column;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -679,14 +501,13 @@ main p {
   box-shadow: 0 6px 14px rgba(163, 217, 193, 0.35);
 }
 
-/* Titelbalk in kaart */
 .genre-title {
   margin-bottom: 15px;
 }
 
 .chip {
   display: inline-block;
-  background-color: #A7C7E7; /* Babyblauw */
+  background-color: #A7C7E7;
   color: #2C3E50;
   font-weight: 600;
   padding: 6px 12px;
@@ -694,7 +515,6 @@ main p {
   font-size: 14px;
 }
 
-/* Lijstjes */
 .genre-list {
   list-style: none;
   padding: 0;
@@ -705,7 +525,7 @@ main p {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  border-bottom: 1px solid rgba(0,0,0,0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   padding: 8px 0;
   font-size: 15px;
 }
@@ -718,16 +538,19 @@ main p {
   flex: 1;
 }
 
-.genre-list li .example {
+.genre-list li .example,
+.examples {
   font-size: 13px;
   color: #5d6570;
   margin-top: 3px;
+  font-style: italic;
 }
-/* Contact container */
+
+/* Contact */
 .contact-container {
   max-width: 900px;
   margin: 40px auto 80px auto;
-  background: rgba(163, 217, 193, 0.25); /* lichte muntgroen */
+  background: rgba(163, 217, 193, 0.25);
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(163, 217, 193, 0.4);
@@ -736,19 +559,16 @@ main p {
   text-align: center;
 }
 
-/* Contact titel */
 .contact-container h1 {
-  color: #A7C7E7; /* muntgroen */
+  color: #A7C7E7;
   margin-bottom: 25px;
 }
 
-/* Contact tekst */
 .contact-container p {
   margin-bottom: 30px;
   line-height: 1.5;
 }
 
-/* Formulier styling */
 .contact-container form {
   display: flex;
   flex-direction: column;
@@ -756,7 +576,6 @@ main p {
   text-align: left;
 }
 
-/* Labels */
 .contact-container label {
   font-weight: 600;
   color: #2C3E50;
@@ -764,7 +583,6 @@ main p {
   display: block;
 }
 
-/* Input & textarea */
 .contact-container input[type="text"],
 .contact-container input[type="email"],
 .contact-container textarea {
@@ -781,14 +599,13 @@ main p {
 .contact-container input[type="text"]:focus,
 .contact-container input[type="email"]:focus,
 .contact-container textarea:focus {
-  border-color: #7AAE9F; /* donkerder muntgroen */
+  border-color: #7AAE9F;
   outline: none;
   box-shadow: 0 0 8px rgba(122, 174, 159, 0.5);
 }
 
-/* Verstuur knop */
 .contact-container button[type="submit"] {
-  background-color: #A3D9C1; /* muntgroen */
+  background-color: #A3D9C1;
   color: white;
   padding: 12px 0;
   font-weight: 700;
@@ -802,81 +619,222 @@ main p {
 
 .contact-container button[type="submit"]:hover,
 .contact-container button[type="submit"]:focus {
-  background-color: #7AAE9F; /* donkerder muntgroen */
+  background-color: #7AAE9F;
   transform: scale(1.05);
   outline: none;
 }
 
-/* Responsief */
+/* Footer */
+footer {
+  background-color: #FFC8A2;
+  color: white;
+  text-align: center;
+  padding: 15px 20px;
+  font-weight: bold;
+  box-shadow: inset 0 3px 5px rgba(255, 255, 255, 0.3);
+  border-radius: 12px 12px 0 0;
+  margin-top: 40px;
+  font-family: 'Arial Black', Gadget, sans-serif;
+}
+
+/* Tablet */
+@media (min-width: 680px) {
+  .author-works {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Mobiel */
+@media screen and (max-width: 768px) {
+  body {
+    padding: 0 10px 25px 10px;
+  }
+
+  header {
+    padding: 10px 0;
+    margin-bottom: 20px;
+  }
+
+  .header-container {
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 10px;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+    text-align: center;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  header h1 img {
+    height: 45px;
+  }
+
+  nav {
+    padding: 12px 10px;
+    margin-bottom: 25px;
+  }
+
+  nav ul {
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  nav ul li a {
+    font-size: 1.1rem;
+    font-family: 'Comic Neue', cursive, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 8px 16px;
+  }
+
+  main.container {
+    display: block;
+    margin: 20px auto;
+    padding: 0;
+  }
+
+  section.manga-overview {
+    width: 100%;
+  }
+
+  aside,
+  aside.bookmark {
+    display: none;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    margin: 20px 0;
+  }
+
+  .container,
+  .about-us,
+  .contact-container,
+  .author-container,
+  .detail-container {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .detail-container {
+    flex-direction: column;
+    gap: 20px;
+    padding: 15px;
+    margin: 15px auto 30px auto;
+  }
+
+  .detail-container img {
+    width: 100%;
+    max-width: 220px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .image-section {
+    display: flex;
+    justify-content: center;
+  }
+
+  .author-work {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .author-work img {
+    width: 120px;
+  }
+
+  .author-work .work-info {
+    align-items: center;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 0 10px;
+  }
+
+  .contact-container {
+    padding: 20px 15px;
+    margin: 20px auto 40px auto;
+    font-size: 1rem;
+  }
+
+  .contact-container input[type="text"],
+  .contact-container input[type="email"],
+  .contact-container textarea {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .logo {
+    width: 180px;
+  }
+
+  footer {
+    font-size: 0.9rem;
+    padding: 12px 10px;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    font-size: 14px;
+    max-width: 100%;
+  }
+
+  th,
+  td {
+    padding: 10px 12px;
+  }
+
+  table img {
+    max-width: 55px;
+    height: auto;
+  }
+
+  .btn-bekijk {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .genre-list li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  body {
+    padding: 10px 10px 30px 10px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  .detail-container {
+    padding: 15px;
+  }
+}
+
 @media (max-width: 480px) {
   .contact-container {
     padding: 20px 15px;
     font-size: 1rem;
   }
-}
 
-/* Responsief */
-@media (max-width: 600px) {
-  .genre-list li {
-    flex-direction: column;
-    align-items: flex-start;
+  nav ul li a {
+    font-size: 1.05rem;
+    font-family: 'Comic Neue', cursive, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
-}
-
-
-/* Responsive */
-@media screen and (max-width: 768px) {
-  .detail-container {
-    flex-direction: column;
-    padding: 15px;
-  }
-  
-  .detail-info {
-    margin-top: 20px;
-  }
-}
-
-
-.btn-bekijk:hover,
-.btn-bekijk:focus {
-  background-color: #A7C7E7; /* babyblauw */
-  color: white; 
-  box-shadow: 0 6px 12px rgba(167, 199, 231, 0.7);
-  transform: scale(1.1);
-  outline: none;
-}
-
-
-/* Responsive */
-@media screen and (max-width: 768px) {
-  main.container {
-    flex-direction: column;
-    padding: 0 10px;
-  }
-  aside {
-    width: 100%;
-    border-radius: 25px 25px 0 0;
-    position: relative;
-    top: auto;
-    margin-bottom: 30px;
-  }
-}
-
-@media screen and (max-width: 600px) {
-    body {
-        padding: 10px 10px 30px 10px;
-    }
-
-    table {
-        font-size: 14px;
-    }
-
-    img {
-        max-width: 60px;
-    }
-
-    .detail-container {
-        padding: 15px;
-        flex-direction: column;
-    }
 }
