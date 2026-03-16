@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manga overzicht</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    .filterbar {
+      max-width: 1100px;
+      margin: 0 auto 15px auto;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .filterbar input[type="text"] {
+      flex: 1;
+      padding: 8px 12px;
+      border: 2px solid #A3D9C1;
+      border-radius: 8px;
+    }
+
+    th a {
+      color: #2C3E50;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    th a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <%- include('partials/header') %>
+  <%- include('partials/nav') %>
+
+  <%
+    const _q = typeof q !== 'undefined' ? q : '';
+    const _sort = typeof sort !== 'undefined' ? sort : 'title';
+    const _order = typeof order !== 'undefined' ? order : 'asc';
+  %>
+
+  <main>
+    <div class="main-wrapper">
+      <section class="content">
+
+        <form method="GET" action="/" class="filterbar">
+          <input type="text" name="q" placeholder="Filter op titel…" value="<%= _q %>" />
+          <input type="hidden" name="sort" value="<%= _sort %>">
+          <input type="hidden" name="order" value="<%= _order %>">
+          <button type="submit" class="btn-bekijk" style="border:none;">Filter</button>
+        </form>
+
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Afbeelding</th>
+
+              <th>
+                <a href="/?sort=title&order=<%= (_sort==='title' && _order==='asc') ? 'desc' : 'asc' %>&q=<%= _q %>">
+                  Titel <%= _sort==='title' ? (_order==='asc' ? '▲' : '▼') : '' %>
+                </a>
+              </th>
+
+              <th>
+                <a href="/?sort=genre&order=<%= (_sort==='genre' && _order==='asc') ? 'desc' : 'asc' %>&q=<%= _q %>">
+                  Genre <%= _sort==='genre' ? (_order==='asc' ? '▲' : '▼') : '' %>
+                </a>
+              </th>
+
+              <th>
+                <a href="/?sort=releaseDate&order=<%= (_sort==='releaseDate' && _order==='asc') ? 'desc' : 'asc' %>&q=<%= _q %>">
+                  Release datum <%= _sort==='releaseDate' ? (_order==='asc' ? '▲' : '▼') : '' %>
+                </a>
+              </th>
+
+              <th>Details</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% mangas.forEach(manga => { %>
+              <tr>
+                <td><img src="<%= manga.image %>" alt="<%= manga.title %>" width="80"></td>
+                <td><%= manga.title %></td>
+                <td><%= manga.genre %></td>
+                <td><%= manga.releaseDate %></td>
+                <td><a href="/detail/<%= manga.id %>" class="btn-bekijk">Bekijk</a></td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </section>
+
+      <%- include('partials/aside') %>
+    </div>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

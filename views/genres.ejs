@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ChibiCorner — Genres</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <%- include('partials/header') %>
+  <%- include('partials/nav') %>
+
+  <main>
+    <%- include('partials/aside') %>
+    <h1>Genres</h1>
+    <p>Hier vind je een overzicht van de belangrijkste manga genres, inclusief doelgroepen, hoofdgenres en subgenres.</p>
+
+    <section class="grid">
+      <div class="card">
+        <div class="genre-title"><span class="chip">Doelgroepen</span></div>
+        <ul class="genre-list" id="audiences">
+          <% (genres && genres.audiences || [
+              {name:'Shōnen', desc:'Actie, avontuur, vriendschap', examples:['One Piece','Naruto']},
+              {name:'Shōjo', desc:'Romantiek, emoties', examples:['Fruits Basket']},
+              {name:'Seinen', desc:'Volwassen thema\'s'},
+              {name:'Josei', desc:'Relaties voor volwassenen'},
+              {name:'Kodomomuke', desc:'Voor kinderen'}
+            ]).forEach(function(g){ %>
+            <li>
+              <div>
+                <div style="font-weight:600"><%= g.name %></div>
+                <div class="description"><%= g.desc || '' %></div>
+                <% if (g.examples && g.examples.length) { %>
+                  <div class="examples">Voorbeelden: <%= g.examples.join(', ') %></div>
+                <% } %>
+              </div>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="genre-title"><span class="chip">Hoofdgenres</span></div>
+        <ul class="genre-list" id="mains">
+          <% (genres && genres.mains || [
+            {name:'Actie / Avontuur', desc:'Gevechten, reizen'},
+            {name:'Fantasy', desc:'Magie en mythische werelden'},
+            {name:'Sci‑fi / Mecha', desc:'Robots en futuristische tech'},
+            {name:'Romantiek', desc:'Liefdesverhalen'},
+            {name:'Slice of Life', desc:'Alledaags leven'},
+            {name:'Mystery / Detective', desc:'Puzzels en onderzoek'},
+            {name:'Horror', desc:'Spanning en angst'}
+          ]).forEach(function(g){ %>
+            <li>
+              <div>
+                <div style="font-weight:600"><%= g.name %></div>
+                <div class="description"><%= g.desc || '' %></div>
+                <% if (g.examples && g.examples.length) { %>
+                  <div class="examples">Voorbeelden: <%= g.examples.join(', ') %></div>
+                <% } %>
+              </div>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="genre-title"><span class="chip">Subgenres & Thema's</span></div>
+        <ul class="genre-list" id="subs">
+          <% (genres && genres.subs || [
+            {name:'Isekai', desc:'Ander wereld-transport'},
+            {name:'Magical Girl', desc:'Meisjes met magie'},
+            {name:'Yaoi / BL', desc:'Romantiek tussen mannen'},
+            {name:'Yuri', desc:'Romantiek tussen vrouwen'},
+            {name:'Ecchi', desc:'Suggestieve fanservice'},
+            {name:'Harem', desc:'1 hoofdpersoon, meerdere liefdes'}
+          ]).forEach(function(g){ %>
+            <li>
+              <div>
+                <div style="font-weight:600"><%= g.name %></div>
+                <div class="description"><%= g.desc || '' %></div>
+                <% if (g.examples && g.examples.length) { %>
+                <div class="examples">Voorbeelden: <%= g.examples.join(', ') %></div>
+                <% } %>
+
+              </div>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+
+      <div class="card">
+  <div class="genre-title"><span class="chip">Tips & Links</span></div>
+  <div style="margin-top:10px; color:#5d6570; font-size:14px; line-height:1.45">
+    <p><strong>Tips voor het ontdekken van manga:</strong></p>
+    <ul>
+      <li>Combineer genres om je perfecte manga te vinden, bijvoorbeeld <em>Shōnen + Isekai + Avontuur</em>.</li>
+      <li>Probeer verschillende genres uit om je smaak te ontdekken, zoals romantiek, actie of mysterie.</li>
+      <li>Lees recensies en aanbevelingen om te weten welke manga populair en goed beoordeeld zijn.</li>
+    </ul>
+    <p><strong>Handige links:</strong></p>
+    <ul>
+      <li><a href="https://myanimelist.net/anime.php" target="_blank" rel="noopener noreferrer">MyAnimeList — Ontdek manga en anime per genre</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/List_of_manga_genres_and_topics" target="_blank" rel="noopener noreferrer">Wikipedia — Overzicht van manga genres</a></li>
+      <li><a href="https://www.mangaupdates.com/" target="_blank" rel="noopener noreferrer">MangaUpdates — Database met manga en gebruikersbeoordelingen</a></li>
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+    </section>
+  </main>
+  <%- include('partials/footer') %>
+
+  <script>
+    function textMatch(s, q){ return s && s.toLowerCase().indexOf(q) !== -1 }
+    function filterGenres(){
+      const q = (document.getElementById('q').value || '').toLowerCase().trim();
+      if(!q){ 
+        document.querySelectorAll('.genre-list li').forEach(li=>li.style.display='flex'); 
+        return 
+      }
+      document.querySelectorAll('.genre-list li').forEach(li=>{
+        const name = li.querySelector('div > div').innerText.toLowerCase();
+        const ex = (li.querySelector('.examples') && li.querySelector('.examples').innerText.toLowerCase()) || '';
+        if(name.indexOf(q) !== -1 || ex.indexOf(q) !== -1) li.style.display='flex'; else li.style.display='none';
+      })
+    }
+
+    document.getElementById('q').addEventListener('input', filterGenres);
+  </script>
+</body>
+</html>
+

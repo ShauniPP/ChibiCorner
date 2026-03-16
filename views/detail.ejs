@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= manga.title %> — Details</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <%- include('partials/header') %>
+  <%- include('partials/nav') %>
+
+  <main class="container">
+    <%- include('partials/aside') %>
+
+    <section class="detail-container">
+      <div class="image-section">
+        <img src="<%= manga.coverImage || manga.image %>" alt="<%= manga.title %>" width="300" />
+      </div>
+
+      <div class="info-section">
+        <h1><%= manga.title %></h1>
+
+        <% if (manga.description) { %>
+          <p class="description"><%= manga.description %></p>
+        <% } %>
+
+        <div class="manga-info">
+          <h2>Details</h2>
+          <ul>
+            <li><strong>Aantal volumes:</strong> <%= manga.volumes %></li>
+            <li><strong>Lopend:</strong> <%= manga.ongoing ? "Ja" : "Nee" %></li>
+            <li><strong>Releasedatum:</strong> <%= manga.releaseDate %></li>
+            <li><strong>Genre:</strong> <%= manga.genre %></li>
+            <% if (Array.isArray(manga.tags) && manga.tags.length) { %>
+              <li><strong>Tags:</strong> <%= manga.tags.join(", ") %></li>
+            <% } %>
+          </ul>
+        </div>
+
+        <div class="author-info">
+          <h2>Auteur</h2>
+          <% if (author) { %>
+            <ul>
+              <li>
+                <strong>Naam:</strong>
+                <a href="/author/<%= author.authorId %>"><%= author.name %></a>
+              </li>
+              <li><strong>Nationaliteit:</strong> <%= author.nationality %></li>
+              <li><strong>Geboortejaar:</strong> <%= author.birthYear %></li>
+              <li><strong>Actief:</strong> <%= author.active ? "Ja" : "Nee" %></li>
+            </ul>
+          <% } else { %>
+            <p>Auteurinformatie niet beschikbaar.</p>
+          <% } %>
+        </div>
+
+        <hr style="margin:20px 0; border:none; border-top:1px solid rgba(0,0,0,0.1)">
+
+        <h2>Andere manga’s van deze auteur</h2>
+        <% if (related && related.length) { %>
+          <ul style="list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;">
+            <% related.forEach(r => { %>
+              <li style="display:flex;gap:10px;align-items:flex-start;background:rgba(163,217,193,0.18);border-radius:10px;padding:10px;box-shadow:0 4px 10px rgba(163,217,193,0.25);">
+                <% if (r.coverImage) { %>
+                  <img src="<%= r.coverImage %>" alt="<%= r.title %>" width="60" style="border-radius:6px;box-shadow:1px 1px 5px rgba(163,217,193,0.5);" />
+                <% } %>
+                <div>
+                  <a href="/detail/<%= r.id %>" style="font-weight:700;color:#2C3E50;text-decoration:none;">
+                    <%= r.title %>
+                  </a>
+                  <div style="font-size:0.95rem;color:#5d6570;">
+                    <%= r.genre %> • <%= r.releaseDate %>
+                  </div>
+                </div>
+              </li>
+            <% }) %>
+          </ul>
+        <% } else { %>
+          <p style="color:#5d6570;">Geen andere titels van deze auteur gevonden.</p>
+        <% } %>
+
+        <a href="/" class="btn-back">Terug naar overzicht</a>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>
