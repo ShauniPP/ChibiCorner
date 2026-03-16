@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import mongoose from "mongoose";
-import nodemailer from "nodemailer";
+import fetch from "node-fetch";
 
 import MangaModel from "./models/manga";
 import AuthorModel from "./models/author";
@@ -42,29 +42,6 @@ async function connectDB(): Promise<void> {
   await mongoose.connect(mongoUri);
   console.log("✅ Verbonden met MongoDB Atlas");
 }
-
-// Mail config
-const emailUser = process.env.EMAIL_USER;
-const emailPass = process.env.EMAIL_PASS;
-const emailTo = process.env.EMAIL_TO;
-
-console.log("EMAIL_USER:", emailUser);
-console.log("EMAIL_PASS aanwezig:", !!emailPass);
-console.log("EMAIL_TO:", emailTo);
-
-if (!emailUser || !emailPass || !emailTo) {
-  console.warn(
-    "⚠️ EMAIL_USER, EMAIL_PASS of EMAIL_TO ontbreekt in je .env. Contactformulier zal niet correct werken."
-  );
-}
-
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
 
 // ROUTES
 
@@ -204,19 +181,11 @@ app.get("/contact", (req, res) => {
   res.render("contact");
 });
 
-// Contactformulier versturen
+// Contactformulier versturen via Brevo
 app.post("/contact", async (req, res) => {
   const name = req.body.name?.trim();
   const email = req.body.email?.trim();
   const message = req.body.message?.trim();
-
-  console.log("=== CONTACT FORM SUBMIT ===");
-  console.log("Naam aanwezig:", !!name);
-  console.log("Email aanwezig:", !!email);
-  console.log("Bericht aanwezig:", !!message);
-  console.log("EMAIL_USER:", process.env.EMAIL_USER);
-  console.log("EMAIL_PASS aanwezig:", !!process.env.EMAIL_PASS);
-  console.log("EMAIL_TO:", process.env.EMAIL_TO);
 
   if (!name || !email || !message) {
     return res.status(400).send("Vul alle velden in.");
@@ -226,11 +195,14 @@ app.post("/contact", async (req, res) => {
     return res.status(400).send("Vul een geldig e-mailadres in.");
   }
 
-  if (!emailUser || !emailPass || !emailTo) {
-    console.error("❌ Email instellingen ontbreken");
-    return res
-      .status(500)
-      .send("De e-mailinstellingen ontbreken in het .env bestand.");
+  const brevoApiKey = process.env.BREVO_API_KEY;
+  const senderEmail = process.env.BREVO_SENDER_EMAIL;
+  const senderName = process.env.BREVO_SENDER_NAME || "ChibiCorner";
+  const emailTo = process.env.EMAIL_TO;
+
+  if (!brevoApiKey || !senderEmail || !emailTo) {
+    console.error("❌ Brevo instellingen ontbreken");
+    return res.status(500).send("De e-mailinstellingen ontbreken.");
   }
 
   const safeName = escapeHtml(name);
@@ -238,24 +210,47 @@ app.post("/contact", async (req, res) => {
   const safeMessage = escapeHtml(message).replace(/\n/g, "<br>");
 
   try {
-    console.log("⏳ Probeer mail te verzenden...");
+    console.log("⏳ Probeer mail te verzenden via Brevo...");
 
-    const info = await transporter.sendMail({
-      from: `"ChibiCorner Contact" <${emailUser}>`,
-      to: emailTo,
-      replyTo: email,
-      subject: `Nieuw contactbericht van ${safeName}`,
-      html: `
-        <h2>Nieuw bericht via ChibiCorner</h2>
-        <p><strong>Naam:</strong> ${safeName}</p>
-        <p><strong>E-mail:</strong> ${safeEmail}</p>
-        <p><strong>Bericht:</strong></p>
-        <p>${safeMessage}</p>
-      `,
+    const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "api-key": brevoApiKey,
+      },
+      body: JSON.stringify({
+        sender: {
+          name: senderName,
+          email: senderEmail,
+        },
+        to: [
+          {
+            email: emailTo,
+          },
+        ],
+        replyTo: {
+          name: safeName,
+          email: email,
+        },
+        subject: `Nieuw contactbericht van ${safeName}`,
+        htmlContent: `
+          <h2>Nieuw bericht via ChibiCorner</h2>
+          <p><strong>Naam:</strong> ${safeName}</p>
+          <p><strong>E-mail:</strong> ${safeEmail}</p>
+          <p><strong>Bericht:</strong></p>
+          <p>${safeMessage}</p>
+        `,
+      }),
     });
 
-    console.log("✅ Mail verzonden");
-    console.log("Message ID:", info.messageId);
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error("❌ Brevo fout:", data);
+      return res.status(500).send("Er ging iets mis bij het verzenden van je bericht.");
+    }
+
+    console.log("✅ Mail verzonden via Brevo:", data);
 
     res.send(`
       <html lang="nl">
@@ -304,7 +299,7 @@ app.post("/contact", async (req, res) => {
       </html>
     `);
   } catch (error) {
-    console.error("❌ Fout bij verzenden van e-mail:", error);
+    console.error("❌ Fout bij verzenden via Brevo:", error);
     res.status(500).send("Er ging iets mis bij het verzenden van je bericht.");
   }
 });
@@ -318,15 +313,6 @@ app.use((req, res) => {
 async function startServer(): Promise<void> {
   try {
     await connectDB();
-
-    if (emailUser && emailPass && emailTo) {
-      try {
-        await transporter.verify();
-        console.log("✅ Mailserver is klaar om berichten te verzenden");
-      } catch (mailError) {
-        console.error("❌ Fout bij mailconfiguratie:", mailError);
-      }
-    }
 
     const port = Number(process.env.PORT) || 3000;
 
