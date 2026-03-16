@@ -71,7 +71,7 @@ Volg deze stappen om het project lokaal te starten.
 
 ### 1. Clone de repository
 
-git clone https://github.com/JOUW_GITHUB_NAAM/website-mangas.git
+git clone https://github.com/ShauniPP/ChibiCorner.git
 
 ### 2. Ga naar de projectmap
 
