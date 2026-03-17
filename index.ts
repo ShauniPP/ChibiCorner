@@ -89,27 +89,28 @@ app.get("/", async (req, res) => {
 // Detailpagina
 app.get("/detail/:id", async (req, res) => {
   try {
-    const id = Number(req.params.id);
+    const id = req.params.id;
 
-    if (Number.isNaN(id)) {
-      return res.status(400).send("Ongeldig manga-ID");
-    }
+    console.log("DETAIL id:", id);
 
-    const manga = await MangaModel.findOne({ id }).lean();
+    const manga = await MangaModel.collection.findOne({ id });
+    console.log("GEVONDEN MANGA:", manga);
 
     if (!manga) {
       return res.status(404).send("Manga niet gevonden!");
     }
 
     const author = manga.authorId
-      ? await AuthorModel.findOne({ authorId: manga.authorId }).lean()
+      ? await AuthorModel.collection.findOne({ authorId: manga.authorId })
       : null;
 
     const related = manga.authorId
-      ? await MangaModel.find({
-          authorId: manga.authorId,
-          id: { $ne: manga.id },
-        }).lean()
+      ? await MangaModel.collection
+          .find({
+            authorId: manga.authorId,
+            id: { $ne: manga.id },
+          })
+          .toArray()
       : [];
 
     res.render("detail", { manga, author, related });
@@ -118,7 +119,6 @@ app.get("/detail/:id", async (req, res) => {
     res.status(500).send("Fout bij laden van de detailpagina");
   }
 });
-
 // Auteurpagina
 app.get("/author/:authorId", async (req, res) => {
   try {
@@ -303,7 +303,15 @@ app.post("/contact", async (req, res) => {
     res.status(500).send("Er ging iets mis bij het verzenden van je bericht.");
   }
 });
-
+app.get("/debug/mangas", async (req, res) => {
+  try {
+    const mangas = await MangaModel.find().limit(10).lean();
+    res.json(mangas);
+  } catch (error) {
+    console.error("Debug fout:", error);
+    res.status(500).send("Debug fout");
+  }
+});
 // 404 fallback
 app.use((req, res) => {
   res.status(404).send("Pagina niet gevonden");
