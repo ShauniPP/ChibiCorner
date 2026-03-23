@@ -644,6 +644,14 @@ footer {
   }
 }
 
+/* Tablet + gsm */
+@media screen and (max-width: 1024px) {
+  aside,
+  aside.bookmark {
+    display: none !important;
+  }
+}
+
 /* Mobiel */
 @media screen and (max-width: 768px) {
   body {
@@ -697,11 +705,6 @@ footer {
 
   section.manga-overview {
     width: 100%;
-  }
-
-  aside,
-  aside.bookmark {
-    display: none;
   }
 
   h1 {
